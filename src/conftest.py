@@ -7,7 +7,22 @@ from django.contrib.auth.models import AnonymousUser
 from django.test.html import parse_html
 from django.utils import six
 
+from conferences.models import Conference
 from proposals.models import TalkProposal
+
+
+@pytest.fixture(autouse=True)
+def default_conference(db):
+    """Create a default conference just for testing.
+    """
+    default = Conference.objects.create(
+        id=0,
+        name='Test default conference',
+        slug='test-default',    # Deliberate duplicate constant from settings.
+    )
+    # Make sure things are setup correctly, and trigger DB read right now.
+    assert Conference.objects.get_default() == default
+    return default
 
 
 class HTMLParser:
