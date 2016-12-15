@@ -8,10 +8,8 @@ from django.db import migrations
 def add_pycontw2016(apps, schema_editor):
     Conference = apps.get_model('conferences', 'Conference')
     db_alias = schema_editor.connection.alias
-    Conference.objects.using(db_alias).get_or_create(
-        id=1,
-        name='PyCon Taiwan 2016',
-        slug='pycontw-2016',
+    Conference.objects.using(db_alias).create(
+        id=1, name='PyCon Taiwan 2016', slug='pycontw-2016',
     )
 
 

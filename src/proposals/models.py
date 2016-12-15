@@ -119,6 +119,11 @@ class ProposalQuerySet(models.QuerySet):
 
 class AbstractProposal(EventInfo):
 
+    conference = models.ForeignKey(
+        to='conferences.Conference',
+        verbose_name=_('conference'),
+    )
+
     submitter = BigForeignKey(
         to=settings.AUTH_USER_MODEL,
         verbose_name=_('submitter'),

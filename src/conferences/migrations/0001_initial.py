@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                     verbose_name='ID',
                 )),
                 ('name', models.CharField(max_length=50, verbose_name='name')),
-                ('slug', models.SlugField(verbose_name='slug')),
+                ('slug', models.SlugField(verbose_name='slug', unique=True)),
             ],
             options={
                 'verbose_name': 'conference',

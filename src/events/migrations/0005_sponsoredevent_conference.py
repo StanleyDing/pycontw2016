@@ -20,4 +20,22 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='conferences.Conference', verbose_name='conference'),
             preserve_default=False,
         ),
+        migrations.AddField(
+            model_name='customevent',
+            name='conference',
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='conferences.Conference', verbose_name='conference'),
+            preserve_default=False,
+        ),
+        migrations.AddField(
+            model_name='keynoteevent',
+            name='conference',
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='conferences.Conference', verbose_name='conference'),
+            preserve_default=False,
+        ),
+        migrations.AddField(
+            model_name='proposedtalkevent',
+            name='conference',
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='conferences.Conference', verbose_name='conference'),
+            preserve_default=False,
+        ),
     ]

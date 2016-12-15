@@ -92,6 +92,11 @@ class Location:
 class BaseEvent(models.Model):
     """Base interface for all events in the schedule.
     """
+    conference = models.ForeignKey(
+        to='conferences.Conference',
+        verbose_name=_('conference'),
+    )
+
     LOCATION_CHOICES = [
         (Location.ALL,  _('All rooms')),
         (Location.R012, _('R0, R1, R2')),

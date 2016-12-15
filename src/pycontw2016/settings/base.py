@@ -230,6 +230,8 @@ SLACK_WEBHOOK_URL = env.str('SLACK_WEBHOOK_URL', default=None)
 
 # Project settings.
 
+CONFERENCE_DEFAULT_SLUG = 'pycontw-2016'
+
 PROPOSALS_CREATABLE = False
 
 PROPOSALS_EDITABLE = True

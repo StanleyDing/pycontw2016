@@ -38,11 +38,6 @@ class EAWTextField(models.TextField):
 
 class EventInfo(models.Model):
 
-    conference = models.ForeignKey(
-        to='conferences.Conference',
-        verbose_name=_('conference'),
-    )
-
     title = models.CharField(
         verbose_name=_('title'),
         max_length=140,
