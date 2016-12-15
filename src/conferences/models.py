@@ -42,3 +42,27 @@ class Conference(models.Model):
     class Meta:
         verbose_name = _('conference')
         verbose_name_plural = _('conferences')
+
+    def __str__(self):
+        return self.name
+
+
+class DefaultConferenceManagerMixin:
+    """Mixin for querysets that provides conference filtering by default.
+    """
+    conference_fk_name = 'conference'
+
+    def get_queryset(self):
+        """Filter to include only instances for the current conference.
+
+        Note that we use the slug setting directly to minimize SQL overhead.
+        """
+        slug_key = '{fk}__slug'.format(fk=self.conference_fk_name)
+        qs = super().get_queryset()
+        qs = qs.filter(**{slug_key: settings.CONFERENCE_DEFAULT_SLUG})
+        return qs
+
+
+class DefaultConferenceManager(DefaultConferenceManagerMixin, models.Manager):
+    """A concrete manager using ``DefaultConferenceManagerMixin``.
+    """

@@ -7,6 +7,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext, ugettext_lazy as _
 
+from conferences.models import Conference, DefaultConferenceManager
 from core.models import BigForeignKey, EAWTextField, EventInfo
 
 
@@ -120,7 +121,8 @@ class ProposalQuerySet(models.QuerySet):
 class AbstractProposal(EventInfo):
 
     conference = models.ForeignKey(
-        to='conferences.Conference',
+        to=Conference,
+        default=Conference.objects.get_default,
         verbose_name=_('conference'),
     )
 
@@ -167,7 +169,8 @@ class AbstractProposal(EventInfo):
         object_id_field='proposal_id',
     )
 
-    objects = ProposalQuerySet.as_manager()
+    objects = DefaultConferenceManager.from_queryset(ProposalQuerySet)()
+    all_objects = models.Manager.from_queryset(ProposalQuerySet)()
 
     class Meta:
         abstract = True
